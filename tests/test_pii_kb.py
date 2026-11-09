@@ -73,3 +73,11 @@ def test_console_preview_redacts_json_tool_results():
     )
     out = _preview(user)
     assert "Harper" not in out and "Khan" not in out and "h@x.com" not in out and "harper_khan" not in out
+
+
+def test_zip_inside_identifier_is_not_redacted():
+    from support_desk.pii import redact_text
+
+    assert redact_text("approval_id=A-FBB12345 ok") == "approval_id=A-FBB12345 ok"
+    assert redact_text("order #W8073958") == "order #W8073958"
+    assert redact_text("my zip is 19029.") == "my zip is [zip]."

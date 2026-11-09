@@ -36,7 +36,8 @@ _STREET = re.compile(
     r"(?:Street|St|Road|Rd|Avenue|Ave|Drive|Dr|Lane|Ln|Boulevard|Blvd|Way|Court|Ct|Place|Pl|Park|Terrace)\b\.?"
 )
 _SUITE = re.compile(r"\b(?:Suite|Apt|Unit)\s+\d+\b", re.IGNORECASE)
-_ZIP = re.compile(r"(?<![\d#])\d{5}(?![\d])")
+# A zip must stand alone: digits inside ids like "A-FBB12345" are not zip codes.
+_ZIP = re.compile(r"(?<![\w#-])\d{5}(?![\w])")
 _USER_ID = re.compile(r"\b[a-z]+_[a-z]+_\d{4}\b")
 
 
