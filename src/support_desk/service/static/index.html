@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support Desk Console</title>
+<meta name="description" content="A customer-support agent that takes real actions behind code-enforced policy, human approval and an audit log.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap bar">
+    <span class="brand"><b>support-desk-agent</b><span class="sub"><span class="slash">/</span>console</span></span>
+    <div class="meta mono" id="meta">connecting…</div>
+  </div>
+</header>
+
+<main class="wrap grid">
+  <section class="pane chat" aria-labelledby="chat-h">
+    <div class="pane-head">
+      <div>
+        <p class="label">Customer</p>
+        <h1 id="chat-h" class="h-serif">Chat with <em>support</em></h1>
+      </div>
+      <button class="pill ghost" id="new-thread" type="button">New conversation</button>
+    </div>
+    <div class="thread-id mono" id="thread-id"></div>
+    <ol class="messages" id="messages" aria-live="polite"></ol>
+    <form class="composer" id="composer">
+      <label class="sr-only" for="input">Message</label>
+      <textarea id="input" rows="2" placeholder="Write as the customer, e.g. I want to cancel an order" required></textarea>
+      <button class="pill" id="send" type="submit">Send</button>
+    </form>
+    <details class="examples" id="examples">
+      <summary class="label">Synthetic customers to try (tau-bench data)</summary>
+      <div id="example-list"></div>
+    </details>
+  </section>
+
+  <section class="pane console" aria-labelledby="console-h">
+    <div class="pane-head">
+      <div>
+        <p class="label">Agent console</p>
+        <h2 id="console-h" class="h-serif">What the agent <em>did</em></h2>
+      </div>
+    </div>
+    <dl class="facts" id="facts"></dl>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="trace">Trace</button>
+      <button role="tab" aria-selected="false" data-tab="approvals">Approvals <span class="count" id="n-appr"></span></button>
+      <button role="tab" aria-selected="false" data-tab="tickets">Handoffs <span class="count" id="n-tix"></span></button>
+      <button role="tab" aria-selected="false" data-tab="audit">Audit log</button>
+    </div>
+    <div class="tab-body" id="tab-trace" role="tabpanel"></div>
+    <div class="tab-body" id="tab-approvals" role="tabpanel" hidden></div>
+    <div class="tab-body" id="tab-tickets" role="tabpanel" hidden></div>
+    <div class="tab-body" id="tab-audit" role="tabpanel" hidden></div>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

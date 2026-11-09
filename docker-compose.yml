@@ -1,0 +1,19 @@
+# One command: docker compose up --build   ->   http://localhost:8000
+services:
+  app:
+    build: .
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+      AGENT_MODEL: ${AGENT_MODEL:-claude-haiku-5-5}
+      GUARD_MODE: ${GUARD_MODE:-enforce}
+      APPROVAL_THRESHOLD_USD: ${APPROVAL_THRESHOLD_USD:-1000}
+      SPEND_CAP_USD: ${SPEND_CAP_USD:-5.00}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - desk-data:/app/data   # orders + checkpoints + audit (SQLite), spend ledger, LLM cache
+    restart: unless-stopped
+
+volumes:
+  desk-data:
