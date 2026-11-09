@@ -6,7 +6,7 @@
 
 It answers policy questions from a help center (with citations it can't fake), looks up orders, and cancels, returns, exchanges and modifies them through typed tools. Policy is enforced in code between the model and the tools. Large refunds wait for a person. Every action lands in an audit log with personal data redacted. Built with LangGraph and Claude, and evaluated on the **tau-bench retail** benchmark: 115 test tasks with ground-truth database states.
 
-![Agent console: a customer's "supervisor override" injection is ignored, and the $2,742.67 return waits for human approval](docs/img/console.png)
+![Support inbox: a customer's "supervisor override" injection is ignored, and the $4,569.40 cancellation waits for human approval](docs/img/console.png)
 
 - **Typed tools, checked twice.** The 15 tau-bench retail tools, ported with a pydantic model each. The same class gives the model its JSON schema and validates what the model sends back.
 - **Policy in code, not just the prompt.** A guard node checks every tool call before it runs: is the customer verified, is it their order, and did they say "yes" to *this* action? A failing call goes back to the model with the reason.
